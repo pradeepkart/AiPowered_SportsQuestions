@@ -26,9 +26,21 @@ public class SportsAiService {
     }
 
     public List<Map<String, String>> getQuestions(String sport) {
+        return getQuestions(sport, "");
+    }
+
+    public List<Map<String, String>> getQuestions(String sport, String userPrompt) {
+        if (userPrompt.length() > 1000) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Keep your prompt within 1000 characters.");
+        }
         String prompt = "Generate 10 different factual quiz questions about " + sport
                 + " with accurate, concise answers. Focus on established rules and basic concepts."
                 + " Return only a JSON array of objects with string fields question and answer.";
+        if (!userPrompt.isBlank()) {
+            prompt += " Tailor the quiz to this user's topic or question: " + userPrompt.trim()
+                    + "\nStay within " + sport + ". Always return 10 question-and-answer pairs in the required JSON format,"
+                    + " even if the user asks to display only questions or answers; display is handled separately.";
+        }
         Map<String, Object> itemFormat = Map.of(
                 "type", "object",
                 "properties", Map.of(

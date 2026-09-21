@@ -1,0 +1,9 @@
+{
+  "name": "sports-questions-ui",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1", "build": "vite build", "preview": "vite preview --host 127.0.0.1", "test": "node --test src/request.test.js" },
+  "dependencies": { "react": "^19.0.0", "react-dom": "^19.0.0" },
+  "devDependencies": { "vite": "^6.0.0" }
+}

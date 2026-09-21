@@ -39,3 +39,8 @@ build/
 .env
 .env.*
 !.env.example
+
+### React frontend ###
+frontend/node_modules/
+frontend/dist/
+.npm-cache/

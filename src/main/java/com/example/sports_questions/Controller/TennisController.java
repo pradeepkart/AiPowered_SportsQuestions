@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.sports_questions.Service.SportsAiService;
 
@@ -17,7 +18,7 @@ public class TennisController {
     }
 
     @GetMapping
-    public List<Map<String, String>> getQuestions() {
-        return sportsAiService.getQuestions("tennis");
+    public List<Map<String, String>> getQuestions(@RequestParam(name = "prompt", defaultValue = "") String prompt) {
+        return sportsAiService.getQuestions("tennis", prompt);
     }
 }

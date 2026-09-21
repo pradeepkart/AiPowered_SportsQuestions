@@ -41,6 +41,22 @@ class SportsAiServiceTests {
     }
 
     @Test
+    void includesSearchTopicInGenerationPrompt() {
+        server.expect(requestTo("http://localhost:11434/api/generate"))
+                .andExpect(jsonPath("$.prompt").value(org.hamcrest.Matchers.containsString("offside rule")))
+                .andRespond(withSuccess(response(pairs(10)), MediaType.APPLICATION_JSON));
+        assertEquals(10, service.getQuestions("football", "offside rule").size());
+        server.verify();
+    }
+
+    @Test
+    void rejectsOverlongSearchPromptsBeforeCallingOllama() {
+        assertEquals(HttpStatus.BAD_REQUEST, assertThrows(ResponseStatusException.class,
+                () -> service.getQuestions("football", "x".repeat(1001))).getStatusCode());
+        server.verify();
+    }
+
+    @Test
     void neverReturnsMoreThanTenPairs() {
         server.expect(requestTo("http://localhost:11434/api/generate"))
                 .andRespond(withSuccess(response(pairs(12)), MediaType.APPLICATION_JSON));
