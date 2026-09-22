@@ -560,6 +560,9 @@ footer>span:last-child {
 }
 
 .result-number {
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow-wrap: normal;
   color: #c28ded;
   background: #30203f;
   font-size: 10px;
