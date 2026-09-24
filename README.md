@@ -16,6 +16,9 @@ quiz to the user's topic, for example `/api/cricket?prompt=questions%20about%20b
 
 ## Run
 
+The Spring Boot application lives in `backend/`, including controllers, services,
+configuration, tests, and Maven build files. The React app lives in `frontend/`.
+
 Requires Java 21+ and Ollama. Start Ollama if needed with:
 
 ```powershell
@@ -26,21 +29,22 @@ Then, in another terminal:
 
 ```powershell
 ollama pull qwen2.5:3b
+cd backend
 .\mvnw.cmd spring-boot:run
 ```
 
 Open http://localhost:8080/api/cricket (or one of the other four sports).
-The Ollama URL and model are in src/main/resources/application.properties.
+The Ollama URL and model are in `backend/src/main/resources/application.properties`.
 Generating 10 pairs may take a little time.
 Ollama failures or malformed responses return HTTP 502.
 
-Run checks with .\mvnw.cmd test.
+Run checks from `backend/` with `.\mvnw.cmd test`.
 
 ## React frontend
 
 The `frontend` folder contains a React + JavaScript app with a responsive black
 and purple UI. Requires Node.js 22. Run the backend and Ollama as described above,
-then start the frontend in another terminal:
+then start the frontend in another terminal from the project root:
 
 ```powershell
 cd frontend

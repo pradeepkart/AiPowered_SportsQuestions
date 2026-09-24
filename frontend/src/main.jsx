@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { inferRequest, sports, validatePairs } from './request.js';
+import { inferRequest, sports, validatePairs } from './request.js'; //checks backend response and returns a validated request object
 import './styles.css';
 
 const modes = [{ id: 'questions', label: 'Questions only' }, { id: 'answers', label: 'Answers only' }, { id: 'both', label: 'Questions & answers' }];
 
 function App() {
   const [sport, setSport] = useState('cricket');
-  const [mode, setMode] = useState('both');
-  const [query, setQuery] = useState('');
+  const [mode, setMode] = useState('both'); // questions, answers, or both
+  const [query, setQuery] = useState(''); //search query entered by user
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
